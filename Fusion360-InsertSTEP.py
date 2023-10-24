@@ -9,6 +9,13 @@ def run(context):
     try:
         app = adsk.core.Application.get()
         ui  = app.userInterface
+        product = app.activeProduct
+        design = adsk.fusion.Design.cast(product)
+
+        # Check a Design document is active.
+        if not design:
+            ui.messageBox('No active Fusion design', 'No Design')
+            return
 
         msg = ''
         # Set styles of file dialog.
